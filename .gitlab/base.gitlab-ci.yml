@@ -1,0 +1,14 @@
+include:
+  - '.gitlab/.before-script-template.yml'
+
+pre-checks:
+  extends: .base-template
+  stage: pre-checks
+  when: always
+  script:
+    - pnpm run type-check
+    - pnpm run lint-check
+    - pnpm run test
+    - pnpm run build
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event' && $CI_MERGE_REQUEST_STATE != "merged"

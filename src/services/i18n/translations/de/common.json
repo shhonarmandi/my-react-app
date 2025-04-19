@@ -1,0 +1,12 @@
+{
+  "english": "Englisch",
+  "german": "Deutsch",
+  "changeLanguageTo": "Sprache auf {{language}} ändern",
+  "navbar": {
+    "home": "Home",
+    "aboutUs": "Über uns",
+    "dashboard": "Dashboard"
+  },
+  "pageNotFound": "Diese Seite konnte nicht gefunden werden.",
+  "errorHappened": "Entschuldigung, ein unerwarteter Fehler ist aufgetreten."
+}

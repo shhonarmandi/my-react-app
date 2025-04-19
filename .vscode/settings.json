@@ -1,0 +1,6 @@
+{
+  "files.watcherExclude": {
+    "**/pagesTree.gen.ts": true
+  },
+  "cSpell.words": ["serwist", "tanstack"]
+}

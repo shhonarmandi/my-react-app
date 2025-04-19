@@ -1,0 +1,10 @@
+stages:
+  - pre-checks
+  - release
+
+variables:
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+
+include:
+  - '.gitlab/base.gitlab-ci.yml'
+  - '.gitlab/release.gitlab-ci.yml'

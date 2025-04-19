@@ -1,0 +1,20 @@
+.base-template:
+  image: node:22-slim
+  before_script:
+    - corepack enable
+    - corepack prepare pnpm@latest --activate
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install
+  cache:
+    key:
+      files:
+        - pnpm-lock.yaml
+    paths:
+      - .pnpm-store
+
+.release-template:
+  image: docker:28.1.1
+  services:
+    - docker:28.1.1-dind
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $GITLAB_PERSONAL_ACCESS_TOKEN $CI_REGISTRY

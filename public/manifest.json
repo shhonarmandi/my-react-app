@@ -1,0 +1,71 @@
+{
+  "name": "My React App",
+  "short_name": "My React App",
+  "description": "This template provides a minimal setup to get React",
+  "theme_color": "#FFF",
+  "background_color": "#000",
+  "dir": "ltr",
+  "lang": "en",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/narrow-401x720-light.png",
+      "type": "image/png",
+      "sizes": "401x720",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/screenshots/narrow-401x720-dark.png",
+      "type": "image/png",
+      "sizes": "401x720",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/screenshots/wide-1024x593-light.png",
+      "type": "image/jpeg",
+      "sizes": "1024x593",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/screenshots/wide-1024x593-dark.png",
+      "type": "image/jpeg",
+      "sizes": "1024x593",
+      "form_factor": "wide"
+    }
+  ]
+}

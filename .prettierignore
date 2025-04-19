@@ -1,0 +1,8 @@
+node_modules
+dist
+coverage
+src/pagesTree.gen.ts
+pnpm-lock.yaml
+
+# Assets
+*.svg

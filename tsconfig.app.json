@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable", "webworker"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* Paths */
+    "baseUrl": ".",
+    "paths": {
+      "@components": ["src/components"],
+      "@constants": ["src/constants"],
+      "@contexts": ["src/contexts"],
+      "@hooks": ["src/hooks"],
+      "@layouts": ["src/layouts"],
+      "@services/authentication": ["src/services/authentication"],
+      "@services/api": ["src/services/api"],
+      "@services/i18n": ["src/services/i18n"],
+      "@services/router": ["src/services/router"],
+      "@services/theme": ["src/services/theme"],
+      "@types": ["src/types"],
+      "@utils": ["src/utils"]
+    },
+
+    /* Types */
+    "types": ["@serwist/vite/typings"]
+  },
+  "include": ["src", "services"]
+}

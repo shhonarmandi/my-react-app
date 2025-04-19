@@ -1,0 +1,25 @@
+include:
+  - '.gitlab/.before-script-template.yml'
+
+build:
+  extends: .release-template
+  stage: release
+  when: manual
+  script:
+    - docker build -t $CONTAINER_RELEASE_IMAGE .
+    - docker push $CONTAINER_RELEASE_IMAGE
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'main'
+
+deploy:
+  extends: .release-template
+  stage: release
+  when: manual
+  needs:
+    - build
+  script:
+    # - login to the server via ssh (https://docs.gitlab.com/ee/ci/ssh_keys/)
+    # - docker-compose up -d
+    - echo "deployed to the server"
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'main'
