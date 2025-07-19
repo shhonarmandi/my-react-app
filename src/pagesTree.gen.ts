@@ -10,45 +10,35 @@
 
 import { createFileRoute } from '@tanstack/react-router'
 
-// Import Routes
+import { Route as rootRouteImport } from './pages/__root'
+import { Route as DefaultRouteImport } from './pages/_default'
+import { Route as AuthRouteImport } from './pages/_auth'
 
-import { Route as rootRoute } from './pages/__root'
-import { Route as DefaultImport } from './pages/_default'
-import { Route as AuthImport } from './pages/_auth'
+const DefaultIndexLazyRouteImport = createFileRoute('/_default/')()
+const DefaultAboutUsLazyRouteImport = createFileRoute('/_default/about-us')()
+const AuthDashboardLazyRouteImport = createFileRoute('/_auth/dashboard')()
 
-// Create Virtual Routes
-
-const DefaultIndexLazyImport = createFileRoute('/_default/')()
-const DefaultAboutUsLazyImport = createFileRoute('/_default/about-us')()
-const AuthDashboardLazyImport = createFileRoute('/_auth/dashboard')()
-
-// Create/Update Routes
-
-const DefaultRoute = DefaultImport.update({
+const DefaultRoute = DefaultRouteImport.update({
   id: '/_default',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AuthRoute = AuthImport.update({
+const AuthRoute = AuthRouteImport.update({
   id: '/_auth',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const DefaultIndexLazyRoute = DefaultIndexLazyImport.update({
+const DefaultIndexLazyRoute = DefaultIndexLazyRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => DefaultRoute,
 } as any).lazy(() => import('./pages/_default.index.lazy').then((d) => d.Route))
-
-const DefaultAboutUsLazyRoute = DefaultAboutUsLazyImport.update({
+const DefaultAboutUsLazyRoute = DefaultAboutUsLazyRouteImport.update({
   id: '/about-us',
   path: '/about-us',
   getParentRoute: () => DefaultRoute,
 } as any).lazy(() =>
   import('./pages/_default.about-us.lazy').then((d) => d.Route),
 )
-
-const AuthDashboardLazyRoute = AuthDashboardLazyImport.update({
+const AuthDashboardLazyRoute = AuthDashboardLazyRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => AuthRoute,
@@ -56,49 +46,82 @@ const AuthDashboardLazyRoute = AuthDashboardLazyImport.update({
   import('./pages/_auth.dashboard.lazy').then((d) => d.Route),
 )
 
-// Populate the FileRoutesByPath interface
+export interface FileRoutesByFullPath {
+  '/dashboard': typeof AuthDashboardLazyRoute
+  '/about-us': typeof DefaultAboutUsLazyRoute
+  '/': typeof DefaultIndexLazyRoute
+}
+export interface FileRoutesByTo {
+  '/dashboard': typeof AuthDashboardLazyRoute
+  '/about-us': typeof DefaultAboutUsLazyRoute
+  '/': typeof DefaultIndexLazyRoute
+}
+export interface FileRoutesById {
+  __root__: typeof rootRouteImport
+  '/_auth': typeof AuthRouteWithChildren
+  '/_default': typeof DefaultRouteWithChildren
+  '/_auth/dashboard': typeof AuthDashboardLazyRoute
+  '/_default/about-us': typeof DefaultAboutUsLazyRoute
+  '/_default/': typeof DefaultIndexLazyRoute
+}
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/dashboard' | '/about-us' | '/'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/dashboard' | '/about-us' | '/'
+  id:
+    | '__root__'
+    | '/_auth'
+    | '/_default'
+    | '/_auth/dashboard'
+    | '/_default/about-us'
+    | '/_default/'
+  fileRoutesById: FileRoutesById
+}
+export interface RootRouteChildren {
+  AuthRoute: typeof AuthRouteWithChildren
+  DefaultRoute: typeof DefaultRouteWithChildren
+}
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_auth': {
-      id: '/_auth'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof AuthImport
-      parentRoute: typeof rootRoute
-    }
     '/_default': {
       id: '/_default'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof DefaultImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof DefaultRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_auth/dashboard': {
-      id: '/_auth/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthDashboardLazyImport
-      parentRoute: typeof AuthImport
-    }
-    '/_default/about-us': {
-      id: '/_default/about-us'
-      path: '/about-us'
-      fullPath: '/about-us'
-      preLoaderRoute: typeof DefaultAboutUsLazyImport
-      parentRoute: typeof DefaultImport
+    '/_auth': {
+      id: '/_auth'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_default/': {
       id: '/_default/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof DefaultIndexLazyImport
-      parentRoute: typeof DefaultImport
+      preLoaderRoute: typeof DefaultIndexLazyRouteImport
+      parentRoute: typeof DefaultRoute
+    }
+    '/_default/about-us': {
+      id: '/_default/about-us'
+      path: '/about-us'
+      fullPath: '/about-us'
+      preLoaderRoute: typeof DefaultAboutUsLazyRouteImport
+      parentRoute: typeof DefaultRoute
+    }
+    '/_auth/dashboard': {
+      id: '/_auth/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthDashboardLazyRouteImport
+      parentRoute: typeof AuthRoute
     }
   }
 }
-
-// Create and export the route tree
 
 interface AuthRouteChildren {
   AuthDashboardLazyRoute: typeof AuthDashboardLazyRoute
@@ -123,93 +146,10 @@ const DefaultRouteChildren: DefaultRouteChildren = {
 const DefaultRouteWithChildren =
   DefaultRoute._addFileChildren(DefaultRouteChildren)
 
-export interface FileRoutesByFullPath {
-  '': typeof DefaultRouteWithChildren
-  '/dashboard': typeof AuthDashboardLazyRoute
-  '/about-us': typeof DefaultAboutUsLazyRoute
-  '/': typeof DefaultIndexLazyRoute
-}
-
-export interface FileRoutesByTo {
-  '': typeof AuthRouteWithChildren
-  '/dashboard': typeof AuthDashboardLazyRoute
-  '/about-us': typeof DefaultAboutUsLazyRoute
-  '/': typeof DefaultIndexLazyRoute
-}
-
-export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/_auth': typeof AuthRouteWithChildren
-  '/_default': typeof DefaultRouteWithChildren
-  '/_auth/dashboard': typeof AuthDashboardLazyRoute
-  '/_default/about-us': typeof DefaultAboutUsLazyRoute
-  '/_default/': typeof DefaultIndexLazyRoute
-}
-
-export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/dashboard' | '/about-us' | '/'
-  fileRoutesByTo: FileRoutesByTo
-  to: '' | '/dashboard' | '/about-us' | '/'
-  id:
-    | '__root__'
-    | '/_auth'
-    | '/_default'
-    | '/_auth/dashboard'
-    | '/_default/about-us'
-    | '/_default/'
-  fileRoutesById: FileRoutesById
-}
-
-export interface RootRouteChildren {
-  AuthRoute: typeof AuthRouteWithChildren
-  DefaultRoute: typeof DefaultRouteWithChildren
-}
-
 const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRouteWithChildren,
   DefaultRoute: DefaultRouteWithChildren,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/_auth",
-        "/_default"
-      ]
-    },
-    "/_auth": {
-      "filePath": "_auth.tsx",
-      "children": [
-        "/_auth/dashboard"
-      ]
-    },
-    "/_default": {
-      "filePath": "_default.tsx",
-      "children": [
-        "/_default/about-us",
-        "/_default/"
-      ]
-    },
-    "/_auth/dashboard": {
-      "filePath": "_auth.dashboard.lazy.tsx",
-      "parent": "/_auth"
-    },
-    "/_default/about-us": {
-      "filePath": "_default.about-us.lazy.tsx",
-      "parent": "/_default"
-    },
-    "/_default/": {
-      "filePath": "_default.index.lazy.tsx",
-      "parent": "/_default"
-    }
-  }
-}
-ROUTE_MANIFEST_END */
