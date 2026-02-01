@@ -32,8 +32,8 @@ This command will run an Nginx server that listens to the 8080 port continuously
 
 #### Requirements:
 
-- [Nodejs](https://nodejs.org/en/download) v22 or higher
-- [pnpm](https://pnpm.io/installation) v9.14.4
+- [Nodejs](https://nodejs.org/en/download) v24 or higher
+- [pnpm](https://pnpm.io/installation) v10.28.1
 
 ---
 
