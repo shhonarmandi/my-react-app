@@ -47,14 +47,14 @@ const AuthDashboardLazyRoute = AuthDashboardLazyRouteImport.update({
 )
 
 export interface FileRoutesByFullPath {
+  '/': typeof DefaultIndexLazyRoute
   '/dashboard': typeof AuthDashboardLazyRoute
   '/about-us': typeof DefaultAboutUsLazyRoute
-  '/': typeof DefaultIndexLazyRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof DefaultIndexLazyRoute
   '/dashboard': typeof AuthDashboardLazyRoute
   '/about-us': typeof DefaultAboutUsLazyRoute
-  '/': typeof DefaultIndexLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -66,9 +66,9 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/dashboard' | '/about-us' | '/'
+  fullPaths: '/' | '/dashboard' | '/about-us'
   fileRoutesByTo: FileRoutesByTo
-  to: '/dashboard' | '/about-us' | '/'
+  to: '/' | '/dashboard' | '/about-us'
   id:
     | '__root__'
     | '/_auth'
@@ -88,14 +88,14 @@ declare module '@tanstack/react-router' {
     '/_default': {
       id: '/_default'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof DefaultRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_auth': {
       id: '/_auth'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
