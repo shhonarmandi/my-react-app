@@ -1,5 +1,5 @@
 .base-template:
-  image: node:22-slim
+  image: node:24-slim
   before_script:
     - corepack enable
     - corepack prepare pnpm@latest --activate
@@ -13,8 +13,8 @@
       - .pnpm-store
 
 .release-template:
-  image: docker:28.1.1
+  image: docker:29.2
   services:
-    - docker:28.1.1-dind
+    - docker:29.2-dind
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $GITLAB_PERSONAL_ACCESS_TOKEN $CI_REGISTRY
