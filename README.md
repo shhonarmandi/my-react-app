@@ -26,8 +26,6 @@ This command will run a Nginx server that listens to the 8080 port continuously.
 
 ---
 
----
-
 ### 2. In development mode
 
 #### Requirements:
