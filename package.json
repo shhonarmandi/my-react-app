@@ -1,8 +1,7 @@
 {
   "name": "my-react-app",
   "author": {
-    "name": "Mohsen Honarmandi",
-    "email": "shhonarmandi@outlook.com"
+    "name": "Mohsen Honarmandi"
   },
   "private": true,
   "version": "1.0.0",
