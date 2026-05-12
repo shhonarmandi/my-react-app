@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable", "webworker"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable", "webworker"],
     "module": "ESNext",
     "skipLibCheck": true,
 
@@ -21,20 +21,19 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Paths */
-    "baseUrl": ".",
     "paths": {
-      "@components": ["src/components"],
-      "@constants": ["src/constants"],
-      "@contexts": ["src/contexts"],
-      "@hooks": ["src/hooks"],
-      "@layouts": ["src/layouts"],
-      "@services/authentication": ["src/services/authentication"],
-      "@services/api": ["src/services/api"],
-      "@services/i18n": ["src/services/i18n"],
-      "@services/router": ["src/services/router"],
-      "@services/theme": ["src/services/theme"],
-      "@types": ["src/types"],
-      "@utils": ["src/utils"]
+      "@components": ["./src/components"],
+      "@constants": ["./src/constants"],
+      "@contexts": ["./src/contexts"],
+      "@hooks": ["./src/hooks"],
+      "@layouts": ["./src/layouts"],
+      "@services/authentication": ["./src/services/authentication"],
+      "@services/api": ["./src/services/api"],
+      "@services/i18n": ["./src/services/i18n"],
+      "@services/router": ["./src/services/router"],
+      "@services/theme": ["./src/services/theme"],
+      "@types": ["./src/types"],
+      "@utils": ["./src/utils"]
     },
 
     /* Types */
