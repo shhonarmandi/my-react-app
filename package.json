@@ -4,7 +4,7 @@
     "name": "Mohsen Honarmandi"
   },
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "packageManager": "pnpm@10.28.1",
   "engines": {
