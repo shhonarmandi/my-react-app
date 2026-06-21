@@ -56,8 +56,8 @@ Please refer to package.json file for more available scripts.
 <!-- COVERAGE-START -->
 | Metric | Coverage |
 |--------|----------|
-| Statements | ![100.0%](https://img.shields.io/badge/100.0%25-brightgreen) `175/175` |
+| Statements | ![100.0%](https://img.shields.io/badge/100.0%25-brightgreen) `141/141` |
 | Branches | ![100.0%](https://img.shields.io/badge/100.0%25-brightgreen) `36/36` |
 | Functions | ![100.0%](https://img.shields.io/badge/100.0%25-brightgreen) `75/75` |
-| Lines | ![100.0%](https://img.shields.io/badge/100.0%25-brightgreen) `174/174` |
+| Lines | ![100.0%](https://img.shields.io/badge/100.0%25-brightgreen) `140/140` |
 <!-- COVERAGE-END -->
