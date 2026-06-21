@@ -2,6 +2,34 @@ import {serwist} from '@serwist/vite';
 import {defineConfig} from 'vitest/config';
 import react from '@vitejs/plugin-react-swc';
 import {tanstackRouter} from '@tanstack/router-plugin/vite';
+import type {Plugin} from 'vite';
+
+function preloadEntryChunk(): Plugin {
+  return {
+    name: 'preload-entry-chunk',
+    apply: 'build',
+    transformIndexHtml: {
+      order: 'post',
+      handler(html, context) {
+        const bundle = context.bundle;
+        if (!bundle) {
+          return html;
+        }
+        const entryChunk = Object.values(bundle).find(
+          chunk => chunk.type === 'chunk' && chunk.isEntry
+        ) as {fileName: string} | undefined;
+        if (!entryChunk) {
+          return html;
+        }
+        const preloadTag = `<link rel="modulepreload" crossorigin href="/${entryChunk.fileName}" />`;
+        return html.replace(
+          /<head[^>]*>/i,
+          match => `${match}\n    ${preloadTag}`
+        );
+      },
+    },
+  };
+}
 
 // eslint-disable-next-line import/no-default-export
 export default defineConfig({
@@ -17,6 +45,7 @@ export default defineConfig({
       injectionPoint: 'self.__SW_MANIFEST',
       rollupFormat: 'iife',
     }),
+    preloadEntryChunk(),
   ],
   resolve: {
     tsconfigPaths: true,
