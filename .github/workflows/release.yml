@@ -1,4 +1,4 @@
-name: Release
+name: Release # manual trigger via Actions tab
 
 on:
   workflow_dispatch:
