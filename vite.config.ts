@@ -55,5 +55,25 @@ export default defineConfig({
   },
   test: {
     environment: 'jsdom',
+    globals: true,
+    setupFiles: ['./src/test-setup.ts'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html'],
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: [
+        'src/**/*.types.*',
+        'src/**/*.type.*',
+        'src/**/*.d.ts',
+        'src/main.tsx',
+        'src/pagesTree.gen.ts',
+        'src/vite-env.d.ts',
+        'src/global.d.ts',
+        'src/**/*.styled.*',
+        'src/services/service-worker/**',
+        'src/pages/**',
+        'src/test-setup.ts',
+      ],
+    },
   },
 });
