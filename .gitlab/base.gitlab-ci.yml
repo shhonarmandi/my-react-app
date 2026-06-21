@@ -11,7 +11,8 @@ pre-checks:
     - pnpm run test
     - pnpm run build
   rules:
-    - if: $CI_PIPELINE_SOURCE == 'merge_request_event' && $CI_MERGE_REQUEST_STATE != "merged"
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 update-coverage-badge:
   extends: .base-template
