@@ -1,0 +1,30 @@
+name: Pre-checks
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  pre-checks:
+    name: Type-check, Lint, Test & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js & pnpm
+        uses: ./.github/actions/setup
+
+      - name: Type-check
+        run: pnpm run type-check
+
+      - name: Lint
+        run: pnpm run lint-check
+
+      - name: Test
+        run: pnpm run test
+
+      - name: Build
+        run: pnpm run build
