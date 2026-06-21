@@ -47,12 +47,12 @@ export default defineConfig({
             return '@react-query';
           }
         },
+        comments: {
+          legal: false,
+        },
       },
     },
     chunkSizeWarningLimit: 100,
-  },
-  esbuild: {
-    legalComments: 'none',
   },
   test: {
     environment: 'jsdom',
