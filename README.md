@@ -54,12 +54,10 @@ Please refer to package.json file for more available scripts.
 ## Test Coverage
 
 <!-- COVERAGE-START -->
-
-| Metric     | Coverage                                                               |
-| ---------- | ---------------------------------------------------------------------- |
+| Metric | Coverage |
+|--------|----------|
 | Statements | ![100.0%](https://img.shields.io/badge/100.0%25-brightgreen) `175/175` |
-| Branches   | ![100.0%](https://img.shields.io/badge/100.0%25-brightgreen) `36/36`   |
-| Functions  | ![100.0%](https://img.shields.io/badge/100.0%25-brightgreen) `75/75`   |
-| Lines      | ![100.0%](https://img.shields.io/badge/100.0%25-brightgreen) `174/174` |
-
+| Branches | ![100.0%](https://img.shields.io/badge/100.0%25-brightgreen) `36/36` |
+| Functions | ![100.0%](https://img.shields.io/badge/100.0%25-brightgreen) `75/75` |
+| Lines | ![100.0%](https://img.shields.io/badge/100.0%25-brightgreen) `174/174` |
 <!-- COVERAGE-END -->
