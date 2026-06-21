@@ -12,3 +12,17 @@ pre-checks:
     - pnpm run build
   rules:
     - if: $CI_PIPELINE_SOURCE == 'merge_request_event' && $CI_MERGE_REQUEST_STATE != "merged"
+
+update-coverage-badge:
+  extends: .base-template
+  stage: pre-checks
+  when: always
+  script:
+    - pnpm run test:coverage:readme
+    - git config user.email "ci@gitlab.com"
+    - git config user.name "GitLab CI"
+    - git add README.md
+    - git diff --cached --quiet || git commit -m "chore: update coverage table in README [skip ci]"
+    - git push "https://gitlab-ci-token:${GITLAB_PERSONAL_ACCESS_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git" HEAD:${CI_DEFAULT_BRANCH}
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
