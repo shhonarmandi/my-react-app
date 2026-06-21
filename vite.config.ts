@@ -32,19 +32,61 @@ export default defineConfig({
       output: {
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
-        // Creating a separate chunk for some dependencies
+        // Split large dependencies into separate chunks to keep the entry chunk small
         manualChunks(id: string) {
-          if (id.includes('i18next') || id.includes('react-i18next')) {
+          // i18n
+          if (
+            id.includes('node_modules/i18next') ||
+            id.includes('node_modules/react-i18next')
+          ) {
             return '@i18next';
           }
-          if (id.includes('@tanstack/react-router')) {
+          // React router
+          if (
+            id.includes('node_modules/@tanstack/react-router') ||
+            id.includes('node_modules/@tanstack/router-core')
+          ) {
             return '@react-router';
           }
-          if (id.includes('@tanstack/react-virtual')) {
+          // Virtualization
+          if (id.includes('node_modules/@tanstack/react-virtual')) {
             return '@react-virtual';
           }
-          if (id.includes('@tanstack/react-query')) {
+          // Data fetching
+          if (
+            id.includes('node_modules/@tanstack/react-query') ||
+            id.includes('node_modules/@tanstack/query-core')
+          ) {
             return '@react-query';
+          }
+          // React DOM + scheduler
+          if (
+            id.includes('node_modules/react-dom') ||
+            id.includes('node_modules/scheduler')
+          ) {
+            return '@react-dom';
+          }
+          // React core
+          if (id.includes('node_modules/react/')) {
+            return '@react';
+          }
+          // Styling
+          if (
+            id.includes('node_modules/styled-components') ||
+            id.includes('node_modules/@emotion') ||
+            id.includes('node_modules/react-is') ||
+            id.includes('node_modules/shallowequal') ||
+            id.includes('node_modules/tslib')
+          ) {
+            return '@styled';
+          }
+          // HTTP client
+          if (id.includes('node_modules/axios')) {
+            return '@axios';
+          }
+          // Remaining third-party code
+          if (id.includes('node_modules')) {
+            return '@vendor';
           }
         },
         comments: {
@@ -52,7 +94,7 @@ export default defineConfig({
         },
       },
     },
-    chunkSizeWarningLimit: 100,
+    chunkSizeWarningLimit: 250,
   },
   test: {
     environment: 'jsdom',
