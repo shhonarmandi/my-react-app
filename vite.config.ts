@@ -1,12 +1,14 @@
 import {serwist} from '@serwist/vite';
 import {defineConfig} from 'vitest/config';
 import react from '@vitejs/plugin-react-swc';
-import {TanStackRouterVite} from '@tanstack/router-plugin/vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
+import {tanstackRouter} from '@tanstack/router-plugin/vite';
 
 // eslint-disable-next-line import/no-default-export
 export default defineConfig({
   plugins: [
-    TanStackRouterVite(),
+    tanstackRouter({target: 'react'}),
+    tsconfigPaths(),
     react({
       devTarget: 'es2020',
     }),
@@ -18,9 +20,6 @@ export default defineConfig({
       rollupFormat: 'iife',
     }),
   ],
-  resolve: {
-    tsconfigPaths: true,
-  },
   server: {
     port: 3000,
   },
