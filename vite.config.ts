@@ -131,7 +131,7 @@ export default defineConfig({
     setupFiles: ['./src/test-setup.ts'],
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'html', 'json-summary'],
+      reporter: ['text', 'html'],
       include: ['src/**/*.{ts,tsx}'],
       exclude: [
         'src/**/*.types.*',
